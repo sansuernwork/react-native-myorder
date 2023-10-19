@@ -19,10 +19,10 @@ export type NavtiveProps = NativeStackScreenProps<RootStackParamList>;
 
 const theme = {
   ...DefaultTheme,
-  myOwnProperty: true,
+  roundness: 4,
   colors: {
     ...DefaultTheme.colors,
-    myOwnColor: '#BADA55',
+    primary: '#FF0151',
   },
 };
 
@@ -33,12 +33,21 @@ function App() {
     <NavigationContainer>
       <ReduxProvider>
         <PaperProvider theme={theme}>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+              },
+              headerTintColor: '#fff',
+            }}>
             <Stack.Screen
               name="Home"
               options={({navigation}: NavtiveProps) => ({
+                headerTitle: 'Home Screen',
                 headerRight: () => (
                   <Appbar.Action
+                    iconColor="white"
                     icon="plus"
                     onPress={() => navigation.navigate('ProductCreate')}
                   />
@@ -46,7 +55,13 @@ function App() {
               })}
               component={Home}
             />
-            <Stack.Screen name="ProductCreate" component={ProductCreate} />
+            <Stack.Screen
+              name="ProductCreate"
+              options={({navigation}: NavtiveProps) => ({
+                headerTitle: 'Product Create Screen',
+              })}
+              component={ProductCreate}
+            />
           </Stack.Navigator>
         </PaperProvider>
       </ReduxProvider>
