@@ -1,8 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
+import homeSlice from './redux-features/home/home-slice';
 
 const store: any = configureStore({
-  reducer: {},
+  reducer: {homeSlice},
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
