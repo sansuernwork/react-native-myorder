@@ -21,16 +21,36 @@ prisma.$connect().then(() => {
   });
 });
 
-app.get('/api/ap', async (req: Request, res: Response) => {
-  const result = await prisma.user.findMany();
+app.get('/api/product', async (req: Request, res: Response) => {
+  const result = await prisma.product.findMany();
   res.send(result);
 });
 
-app.get('/api/create', async (req: Request, res: Response) => {
-  const result = await prisma.user.create({
-    data: {
-      email: 'test',
-      name: 'test',
+app.post('/api/product', async (req: Request, res: Response) => {
+  const data = req.body;
+  const result = await prisma.product.create({
+    data: data,
+  });
+  res.send(result);
+});
+
+app.patch('/api/product/:id', async (req: Request, res: Response) => {
+  const data = req.body;
+  const id = req.params.id;
+  const result = await prisma.product.update({
+    where: {
+      id: Number(id),
+    },
+    data: data,
+  });
+  res.send(result);
+});
+
+app.delete('/api/product/:id', async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await prisma.product.delete({
+    where: {
+      id: Number(id),
     },
   });
   res.send(result);
