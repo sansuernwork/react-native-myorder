@@ -24,7 +24,9 @@ const HomeProductCreate: FC = () => {
     stock: 1,
   });
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log(formData)
+  };
 
   const CheckValidString = (value: string, key: string) => {
     const regex = /[@^&$*%#!#]/g;
