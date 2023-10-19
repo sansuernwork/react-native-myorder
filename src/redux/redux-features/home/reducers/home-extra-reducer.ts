@@ -12,6 +12,12 @@ export default (builder: ActionReducerMapBuilder<HomeStateType>) => {
   builder.addCase(homeService.editProduct.fulfilled, (state, {payload}) => {
     state.isLoading = true;
   });
+  builder.addCase(homeService.deleteProduct.fulfilled, (state, {payload}) => {
+    state.isLoading = true;
+  });
+  builder.addCase(homeService.deleteProduct.pending, (state, {payload}) => {
+    state.isLoading = false;
+  });
   builder.addCase(homeService.editProduct.pending, (state, {payload}) => {
     state.isLoading = false;
   });

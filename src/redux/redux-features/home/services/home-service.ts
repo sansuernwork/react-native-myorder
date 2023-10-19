@@ -57,7 +57,27 @@ const editProduct = createAsyncThunk(
   },
 );
 
+const deleteProduct = createAsyncThunk(
+  'homeSlice/delete_product',
+  async (id:string) => {
+    try {
+      const response = await Axios({
+        method: 'DELETE',
+        url: `/product/${id}`,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.status;
+    } catch (err) {
+      // custom error
+      console.log(err);
+    }
+  },
+);
+
 export default {
+  deleteProduct,
   getProduct,
   addProduct,
   editProduct,
