@@ -8,9 +8,12 @@
     "lint": "eslint .",
     "starts": "react-native start",
     "test": "jest",
+    "init" : "concurrently \"npm run init_server\" \"npm run init_client\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
-    "client": "npm run android"
+    "client": "npm run android",
+    "init_server": "cd backend && npm i",
+    "init_client": "npm i"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.8",
