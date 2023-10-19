@@ -1,21 +1,21 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {MD3LightTheme as DefaultTheme} from 'react-native-paper';
+import {Appbar, MD3LightTheme as DefaultTheme} from 'react-native-paper';
 import Home from './src/features/Home/Home';
-import Stock from './src/features/Stock/Stock';
 import {ReduxProvider} from './src/redux/store';
 import {PaperProvider} from 'react-native-paper';
+import ProductCreate from './src/features/Home/Home-product-create';
 type RootStackParamList = {
   Home: undefined;
-  Stock: undefined;
+  ProductCreate: undefined;
 };
 
-type NavtiveProps = NativeStackScreenProps<RootStackParamList>;
+export type NavtiveProps = NativeStackScreenProps<RootStackParamList>;
 
 const theme = {
   ...DefaultTheme,
@@ -36,12 +36,17 @@ function App() {
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
               name="Home"
-              options={{
-                headerShown: false,
-              }}
+              options={({navigation}: NavtiveProps) => ({
+                headerRight: () => (
+                  <Appbar.Action
+                    icon="plus"
+                    onPress={() => navigation.navigate('ProductCreate')}
+                  />
+                ),
+              })}
               component={Home}
             />
-            <Stack.Screen name="Stock" component={Stock} />
+            <Stack.Screen name="ProductCreate" component={ProductCreate} />
           </Stack.Navigator>
         </PaperProvider>
       </ReduxProvider>

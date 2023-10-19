@@ -12,7 +12,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import * as root from './styles/home.style';
 import {Appbar, Button} from 'react-native-paper';
-
+import {NavtiveProps} from '../../../App';
 
 const data = [
   // สร้างข้อมูลสินค้า
@@ -29,16 +29,9 @@ const data = [
   // เพิ่มสินค้าเพิ่มเติมตามความต้องการ
 ];
 
-const Home = () => {
+const Home = ({navigation}: NavtiveProps) => {
   return (
     <View style={root.default.container}>
-      <Appbar>
-        <Appbar.Content title="Products Stock"></Appbar.Content>
-        <Appbar.Action
-          icon="image-frame"
-          onPress={() => console.log('Pressed archive')}
-        />
-      </Appbar>
       <FlatList
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -47,13 +40,15 @@ const Home = () => {
         numColumns={2}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <View style={root.default.itemContainer}>
-            <Image
-              style={root.default.image}
-              source={require('../../assets/image1.jpg')}></Image>
-            <Text style={root.default.productName}>{item.name}</Text>
-            <Text style={root.default.productPrice}>{`฿${item.price}`}</Text>
-          </View>
+          <Pressable onPress={() => {}} style={root.default.itemContainer}>
+            <View>
+              <Image
+                style={root.default.image}
+                source={require('../../assets/image1.jpg')}></Image>
+              <Text style={root.default.productName}>{item.name}</Text>
+              <Text style={root.default.productPrice}>{`฿${item.price}`}</Text>
+            </View>
+          </Pressable>
         )}
       />
     </View>
