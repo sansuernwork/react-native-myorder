@@ -25,6 +25,29 @@ const HomeProductEdit = ({
   if (!params) {
     navigation.navigate('Home');
   }
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      title: 'Updated!',
+      headerRight: () => (
+        <Appbar.Action
+          iconColor="white"
+          icon="delete"
+          onPress={async () => {
+            const result = await dispatch<AppDispatch>(
+              homeService.deleteProduct(params.data.id.toString()),
+            );
+
+            if (result.payload === 200) {
+              openSnackbar('Delete successfully');
+              navigation.navigate('Home');
+            }
+          }}
+        />
+      ),
+    });
+  }, []);
+
   const [isLoading, setIsloading] = React.useState(false);
   const paramData = params.data;
   const [resourcePath, setResourcePath] = React.useState<string | undefined>(
