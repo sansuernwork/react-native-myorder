@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "starts": "react-native start",
     "test": "jest",
-    "init" : "concurrently \"npm run init_server\" \"npm run init_client\"",
+    "init" : "npm i && concurrently \"npm run init_server\" \"npm run init_client\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
     "client": "npm run android",
