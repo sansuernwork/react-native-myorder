@@ -6,14 +6,9 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
-    "starts": "react-native start",
+    "start": "react-native start",
     "test": "jest",
-    "init" : "npm i && concurrently \"npm run init_server\" \"npm run init_client\"",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npm run dev",
-    "client": "npm run android",
-    "init_server": "cd backend && npm i",
-    "init_client": "npm i"
+    "init": "npm i && concurrently \"npm run init_server\" \"npm run init_client\""
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.8",
