@@ -7,8 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest",
-    "init": "npm i && concurrently \"npm run init_server\" \"npm run init_client\""
+    "test": "jest"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.8",
