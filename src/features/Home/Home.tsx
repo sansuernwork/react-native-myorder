@@ -49,6 +49,7 @@ const Home = ({navigation}: NavtiveProps) => {
                 style={root.default.image}
                 source={{uri: config.SERVER_ASSETS + item.image}}></Image>
               <Text style={root.default.productName}>{item.name}</Text>
+              <Text style={root.default.productDesc}>{item.description}</Text>
               <Text style={root.default.productPrice}>{`฿${item.price}`}</Text>
             </View>
           </Pressable>
