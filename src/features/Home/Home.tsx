@@ -1,8 +1,18 @@
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  Touchable,
+  View,
+} from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import * as root from './styles/home.style';
+import {Appbar, Button} from 'react-native-paper';
+
 
 const data = [
   // สร้างข้อมูลสินค้า
@@ -22,7 +32,16 @@ const data = [
 const Home = () => {
   return (
     <View style={root.default.container}>
+      <Appbar>
+        <Appbar.Content title="Products Stock"></Appbar.Content>
+        <Appbar.Action
+          icon="image-frame"
+          onPress={() => console.log('Pressed archive')}
+        />
+      </Appbar>
       <FlatList
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={root.default.grid}
         data={data}
         numColumns={2}
