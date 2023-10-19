@@ -37,7 +37,28 @@ const addProduct = createAsyncThunk(
   },
 );
 
+const editProduct = createAsyncThunk(
+  'homeSlice/edit_product',
+  async ({id, data}: {id: string; data: FormData}) => {
+    try {
+      const response = await Axios({
+        method: 'PATCH',
+        url: `/product/${id}`,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        data: data,
+      });
+      return response.status;
+    } catch (err) {
+      // custom error
+      console.log(err);
+    }
+  },
+);
+
 export default {
   getProduct,
   addProduct,
+  editProduct,
 };

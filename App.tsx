@@ -10,9 +10,15 @@ import Home from './src/features/Home/Home';
 import {ReduxProvider} from './src/redux/store';
 import {PaperProvider} from 'react-native-paper';
 import ProductCreate from './src/features/Home/Home-product-create';
-type RootStackParamList = {
+import HomeProductEdit from './src/features/Home/Home-product-edit';
+import { Product } from './src/type/type';
+
+export type RootStackParamList = {
   Home: undefined;
   ProductCreate: undefined;
+  ProductEdit: {
+    data: Product;
+  };
 };
 
 export type NavtiveProps = NativeStackScreenProps<RootStackParamList>;
@@ -62,6 +68,13 @@ function App() {
                 headerTitle: 'Product Create Screen',
               })}
               component={ProductCreate}
+            />
+            <Stack.Screen
+              name="ProductEdit"
+              options={({navigation}: NavtiveProps) => ({
+                headerTitle: 'Product Edit Screen',
+              })}
+              component={HomeProductEdit as any}
             />
           </Stack.Navigator>
         </PaperProvider>

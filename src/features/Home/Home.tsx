@@ -41,7 +41,9 @@ const Home = ({navigation}: NavtiveProps) => {
         numColumns={2}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <Pressable onPress={() => {}} style={root.default.itemContainer}>
+          <Pressable onPress={() => navigation.navigate("ProductEdit", {
+            data: item,
+          })} style={root.default.itemContainer}>
             <View>
               <Image
                 style={root.default.image}

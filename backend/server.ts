@@ -5,7 +5,7 @@ import {Server} from 'http';
 import prisma from './src/client';
 const multer = require('multer');
 var fs = require('fs');
-var path = require('path')
+var path = require('path');
 
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
@@ -38,7 +38,11 @@ prisma.$connect().then(() => {
 });
 
 app.get('/api/product', async (req: Request, res: Response) => {
-  const result = await prisma.product.findMany();
+  const result = await prisma.product.findMany({
+    orderBy: {
+      id: "desc"
+    }
+  });
   res.send(result);
 });
 
@@ -49,8 +53,8 @@ app.post('/api/product', upload, async (req: Request, res: Response) => {
     ...data,
     price: parseInt(data.price),
     stock: parseInt(data.stock),
-    cost_price: parseInt(data.cost_price)
-  }
+    cost_price: parseInt(data.cost_price),
+  };
   const result = await prisma.product.create({
     data: {
       ...formData,
@@ -60,15 +64,40 @@ app.post('/api/product', upload, async (req: Request, res: Response) => {
   res.send(result);
 });
 
-app.patch('/api/product/:id', async (req: Request, res: Response) => {
-  const data = req.body;
+app.patch('/api/product/:id', upload, async (req: Request, res: Response) => {
   const id = req.params.id;
-  const result = await prisma.product.update({
-    where: {
-      id: Number(id),
-    },
-    data: data,
-  });
+  const data = req.body;
+  const fileName = req.file?.filename;
+  const formData = {
+    ...data,
+    price: parseInt(data.price),
+    stock: parseInt(data.stock),
+    cost_price: parseInt(data.cost_price),
+  };
+
+  let result;
+
+  if (fileName) {
+
+    result = await prisma.product.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        ...formData,
+        image: fileName,
+      },
+    });
+  } else {
+    result = await prisma.product.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        ...formData,
+      },
+    });
+  }
   res.send(result);
 });
 

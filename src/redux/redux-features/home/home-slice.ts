@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Product} from '../../../type/type';
+import homeExtraReducer from './reducers/home-extra-reducer';
 import homeReducer from './reducers/home-reducer';
-import homeService from './services/home-service';
 
 export type HomeStateType = {
   isLoading: boolean;
@@ -17,20 +17,7 @@ const homeSlice = createSlice({
   name: 'homeSlice',
   initialState,
   reducers: homeReducer,
-  extraReducers: builder => {
-    builder.addCase(homeService.getProduct.fulfilled, (state, {payload}) => {
-      state.products = payload;
-    });
-    builder.addCase(homeService.addProduct.fulfilled, (state, {payload}) => {
-      state.isLoading = true;
-    });
-    builder.addCase(homeService.getProduct.pending, (state, {payload}) => {
-      state.isLoading = false;
-    });
-    builder.addCase(homeService.addProduct.pending, (state, {payload}) => {
-      state.isLoading = false;
-    });
-  },
+  extraReducers: homeExtraReducer,
 });
 
 export const {} = homeSlice.actions;
