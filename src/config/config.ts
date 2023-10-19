@@ -1,3 +1,3 @@
 export default {
-  SERVER_IP: 'http://localhost:3000/api',
+  SERVER_IP: 'http://192.168.1.48:3000/api',
 };

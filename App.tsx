@@ -17,12 +17,13 @@ type RootStackParamList = {
 
 export type NavtiveProps = NativeStackScreenProps<RootStackParamList>;
 
-const theme = {
+export const theme = {
   ...DefaultTheme,
   roundness: 4,
   colors: {
     ...DefaultTheme.colors,
     primary: '#FF0151',
+    secondary: '#FFEBF2',
   },
 };
 

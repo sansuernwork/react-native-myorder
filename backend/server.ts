@@ -3,8 +3,24 @@ import express, {Request, Response} from 'express';
 import {PrismaClient} from '@prisma/client';
 import {Server} from 'http';
 import prisma from './src/client';
+const multer = require('multer');
+var fs = require('fs');
+var path = require('path')
+
+const storage = multer.diskStorage({
+  destination: function (req: any, file: any, cb: any) {
+    cb(null, './uploads');
+  },
+  filename: function (req: any, file: any, cb: any) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + file.originalname);
+  },
+});
+
+const upload = multer({storage: storage}).single('file');
 
 const app = express();
+app.use('/assets', express.static(path.resolve('uploads')));
 // parse json request body
 app.use(express.json());
 
@@ -26,10 +42,20 @@ app.get('/api/product', async (req: Request, res: Response) => {
   res.send(result);
 });
 
-app.post('/api/product', async (req: Request, res: Response) => {
+app.post('/api/product', upload, async (req: Request, res: Response) => {
   const data = req.body;
+  const fileName = req.file?.filename;
+  const formData = {
+    ...data,
+    price: parseInt(data.price),
+    stock: parseInt(data.stock),
+    cost_price: parseInt(data.cost_price)
+  }
   const result = await prisma.product.create({
-    data: data,
+    data: {
+      ...formData,
+      image: fileName,
+    },
   });
   res.send(result);
 });

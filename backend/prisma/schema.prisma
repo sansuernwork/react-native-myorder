@@ -20,9 +20,9 @@ model Product {
   id          Int       @id @default(autoincrement())
   name        String
   description String
-  cost_price  String
-  price       String
-  stock       String
-  image       String
+  cost_price  Decimal
+  price       Decimal
+  stock       Int
+  image       String?
   created_at  DateTime?
 }
