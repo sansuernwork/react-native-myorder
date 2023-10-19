@@ -1,4 +1,4 @@
-import {View, Text, Image, Pressable} from 'react-native';
+import {View, Text, Image, Pressable, Alert} from 'react-native';
 import React, {FC} from 'react';
 import {Appbar, Button, Icon, TextInput} from 'react-native-paper';
 import homeProductCreateStyle from './styles/home-product-create.style';
@@ -53,27 +53,39 @@ const HomeProductCreate = ({navigation}: NavtiveProps) => {
     description: '',
     cost_price: 1,
     price: 1,
-    image: '',
     stock: 1,
   });
 
+  function IsEmpty(data: {[key: string]: string | number}) {
+    for (const key in data) {
+      if (data[key] === '') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   const handleSubmit = async () => {
     let data = new FormData();
-    data.append('file', {
-      uri: imageData.uri,
-      type: imageData.type,
-      name: imageData.name,
-    });
-    data.append('name', formData.name);
-    data.append('description', formData.description);
-    data.append('cost_price', formData.cost_price);
-    data.append('price', formData.price);
-    data.append('stock', formData.stock);
-    const result = await dispatch<AppDispatch>(
-      homeService.addProduct(data),
-    );
-    if (result.payload === 200) {
-      navigation.replace('Home');
+    if (IsEmpty(formData)) {
+      Alert.alert('Warning', 'There must be no empty', [
+        {text: 'OK', onPress: () => {}},
+      ]);
+    } else {
+      data.append('file', {
+        uri: imageData.uri,
+        type: imageData.type,
+        name: imageData.name,
+      });
+      data.append('name', formData.name);
+      data.append('description', formData.description);
+      data.append('cost_price', formData.cost_price);
+      data.append('price', formData.price);
+      data.append('stock', formData.stock);
+      // const result = await dispatch<AppDispatch>(homeService.addProduct(data));
+      // if (result.payload === 200) {
+      //   navigation.navigate('Home');
+      // }
     }
   };
 

@@ -15,6 +15,7 @@ import {Appbar, Button} from 'react-native-paper';
 import {NavtiveProps} from '../../../App';
 import homeService from '../../redux/redux-features/home/services/home-service';
 import {HomeStateType} from '../../redux/redux-features/home/home-slice';
+import config from '../../config/config';
 
 const Home = ({navigation}: NavtiveProps) => {
   const {homeSlice}: {homeSlice: HomeStateType} = useSelector(
@@ -44,7 +45,7 @@ const Home = ({navigation}: NavtiveProps) => {
             <View>
               <Image
                 style={root.default.image}
-                source={require('../../assets/image1.jpg')}></Image>
+                source={{uri: config.SERVER_ASSETS + item.image}}></Image>
               <Text style={root.default.productName}>{item.name}</Text>
               <Text style={root.default.productPrice}>{`฿${item.price}`}</Text>
             </View>
