@@ -1,3 +1,16 @@
+
+วิธีติดตั้ง
+
+1.npm i && npm run start
+
+2.cd backend && npm i && npm run dev
+
+
+
+
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
